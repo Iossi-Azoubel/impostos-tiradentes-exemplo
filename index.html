@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Novo Quinto — Tiradentes e a Carga Tributária Brasileira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Paleta histórica */
+    --pergaminho: #f4ead5;
+    --pergaminho-escuro: #e8dbb8;
+    --sepia: #8b5a2b;
+    --sepia-escuro: #5c3a1e;
+    --tinta: #2a1810;
+    --ouro: #c8a04e;
+    --ouro-escuro: #9a7b3a;
+    --sangue: #8b2f2f;
+
+    /* Paleta moderna */
+    --bg-moderno: #fafaf7;
+    --texto-moderno: #1a1a1a;
+    --cinza-suave: #6b6b6b;
+    --cinza-borda: #e5e5e0;
+    --destaque: #c8311c;
+    --imposto: #d4a84a;
+    --produto: #2d5f4f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--pergaminho);
+    color: var(--tinta);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ================= HERO HISTÓRICO ================= */
+  .hero {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at center, rgba(244, 234, 213, 0.3) 0%, rgba(92, 58, 30, 0.4) 100%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(139, 90, 43, 0.03) 2px,
+        rgba(139, 90, 43, 0.03) 4px
+      ),
+      var(--pergaminho);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+
+  /* Textura de papel envelhecido */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(139, 90, 43, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(92, 58, 30, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 90%, rgba(139, 90, 43, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 80%, rgba(92, 58, 30, 0.15) 100%);
+    pointer-events: none;
+  }
+
+  .hero-conteudo {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .data-historica {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    color: var(--sepia);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.2s forwards;
+  }
+
+  .data-historica::before,
+  .data-historica::after {
+    content: '◈';
+    margin: 0 1rem;
+    color: var(--ouro-escuro);
+  }
+
+  .titulo-historico {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    color: var(--tinta);
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+
+  .titulo-historico .destaque {
+    font-style: italic;
+    color: var(--sangue);
+    font-weight: 600;
+  }
+
+  .subtitulo-historico {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--sepia-escuro);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.9s forwards;
+  }
+
+  .citacao-bloco {
+    border-left: 3px solid var(--ouro-escuro);
+    padding: 1.5rem 2rem;
+    margin: 3rem auto;
+    max-width: 650px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 0;
+    animation: fadeUp 1.2s ease 1.3s forwards;
+  }
+
+  .citacao-texto {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--tinta);
+    line-height: 1.5;
+  }
+
+  .citacao-autor {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--sepia);
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--sepia);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 1s ease 2s forwards, bounce 2s ease-in-out 3s infinite;
+  }
+
+  .scroll-indicator::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: var(--sepia);
+    margin: 0.8rem auto 0;
+  }
+
+  /* ================= TRANSIÇÃO ================= */
+  .transicao {
+    background: linear-gradient(180deg,
+      var(--pergaminho) 0%,
+      var(--pergaminho-escuro) 40%,
+      #d9ccb0 70%,
+      var(--bg-moderno) 100%);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .transicao-texto {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: var(--sepia-escuro);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  .transicao-texto .ano-velho {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+    color: var(--sepia);
+    margin: 0 0.5rem;
+  }
+
+  .transicao-texto .ano-novo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+    color: var(--destaque);
+    margin: 0 0.5rem;
+    font-weight: 700;
+  }
+
+  /* ================= SEÇÃO MODERNA ================= */
+  .moderno {
+    background: var(--bg-moderno);
+    color: var(--texto-moderno);
+    padding: 6rem 2rem;
+    font-family: 'Fraunces', serif;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .secao-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .etiqueta {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--destaque);
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--destaque);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .titulo-moderno {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .titulo-moderno .highlight {
+    background: linear-gradient(180deg, transparent 60%, rgba(200, 168, 74, 0.4) 60%);
+    padding: 0 0.2em;
+  }
+
+  .descricao-moderno {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--cinza-suave);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ================= PRODUTO BASE ================= */
+  .produto-base {
+    background: white;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 4px;
+    padding: 3rem;
+    margin-bottom: 4rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .camiseta-svg {
+    width: 140px;
+    height: 140px;
+  }
+
+  .produto-info h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .produto-info p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--cinza-suave);
+    margin-bottom: 1rem;
+  }
+
+  .produto-custo {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--produto);
+    padding: 0.4rem 0.8rem;
+    background: rgba(45, 95, 79, 0.08);
+    border-radius: 2px;
+  }
+
+  /* ================= CADEIA PRODUTIVA ================= */
+  .cadeia {
+    position: relative;
+    margin: 4rem 0;
+  }
+
+  /* AVISO SIMULAÇÃO */
+  .aviso-simulacao {
+    background: #fff8e1;
+    border-left: 4px solid var(--imposto);
+    padding: 1.5rem 2rem;
+    margin: 0 0 3rem 0;
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    border-radius: 2px;
+  }
+
+  .aviso-icone {
+    font-size: 1.8rem;
+    color: var(--ouro-escuro);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .aviso-texto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: #5c4a1a;
+    line-height: 1.5;
+  }
+
+  .aviso-texto strong {
+    color: var(--sepia-escuro);
+    font-weight: 700;
+  }
+
+  .aviso-texto em {
+    font-style: italic;
+  }
+
+  /* DIAGRAMA DE FLUXO */
+  .diagrama-fluxo {
+    background: white;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 4px;
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .diagrama-titulo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--texto-moderno);
+    letter-spacing: -0.01em;
+  }
+
+  .diagrama-svg {
+    width: 100%;
+    height: auto;
+    max-width: 1100px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .diagrama-legenda {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--cinza-suave);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  .diagrama-legenda strong {
+    color: var(--texto-moderno);
+    font-weight: 600;
+  }
+
+  /* BREAKDOWN DAS ETAPAS */
+  .breakdown-etapa {
+    display: flex;
+    align-items: stretch;
+    gap: 0.5rem;
+    margin: 1.2rem 0 1rem;
+    flex-wrap: wrap;
+  }
+
+  .bd-item {
+    flex: 1;
+    min-width: 100px;
+    padding: 0.7rem 0.9rem;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid transparent;
+  }
+
+  .bd-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    margin-bottom: 0.3rem;
+  }
+
+  .bd-valor {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .bd-custo {
+    background: rgba(107, 107, 107, 0.08);
+    color: var(--cinza-suave);
+  }
+
+  .bd-custo .bd-valor {
+    color: var(--texto-moderno);
+  }
+
+  .bd-margem {
+    background: rgba(45, 95, 79, 0.1);
+    color: var(--produto);
+  }
+
+  .bd-margem .bd-valor {
+    color: var(--produto);
+  }
+
+  .bd-imposto {
+    background: rgba(200, 49, 28, 0.1);
+    color: var(--destaque);
+  }
+
+  .bd-imposto .bd-valor {
+    color: var(--destaque);
+  }
+
+  .bd-total {
+    background: var(--texto-moderno);
+    color: var(--bg-moderno);
+    border: 1px solid var(--texto-moderno);
+  }
+
+  .bd-total .bd-label {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .bd-total .bd-valor {
+    color: white;
+    font-size: 1.05rem;
+  }
+
+  .bd-op {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--cinza-suave);
+    min-width: 14px;
+    padding: 0 0.2rem;
+  }
+
+  .etapa {
+    background: white;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 4px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .etapa:hover {
+    transform: translateX(8px);
+    box-shadow: -4px 4px 0 var(--imposto);
+  }
+
+  .etapa-numero {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--cinza-borda);
+    line-height: 1;
+    text-align: center;
+  }
+
+  .etapa-conteudo h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .etapa-conteudo .descricao {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--cinza-suave);
+    margin-bottom: 1rem;
+  }
+
+  .impostos-detalhe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .imposto-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    background: rgba(212, 168, 74, 0.15);
+    color: var(--ouro-escuro);
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .etapa-valores {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .valor-custo {
+    font-size: 0.75rem;
+    color: var(--cinza-suave);
+    margin-bottom: 0.25rem;
+  }
+
+  .valor-preco {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--texto-moderno);
+    margin-bottom: 0.25rem;
+  }
+
+  .valor-imposto {
+    font-size: 0.8rem;
+    color: var(--destaque);
+    font-weight: 500;
+  }
+
+  .seta-cadeia {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--cinza-borda);
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+
+  /* ================= RESULTADO FINAL ================= */
+  .resultado {
+    background: var(--texto-moderno);
+    color: var(--bg-moderno);
+    padding: 4rem;
+    margin-top: 4rem;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .resultado::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(200, 49, 28, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .resultado-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--imposto);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .resultado-preco {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+  }
+
+  .resultado-breakdown {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .breakdown-item .rotulo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .breakdown-item .valor {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+
+  .breakdown-item.imposto .valor {
+    color: var(--imposto);
+  }
+
+  .breakdown-item.produto .valor {
+    color: #7ec4a8;
+  }
+
+  /* ================= COMPARAÇÃO ================= */
+  .comparacao {
+    background: var(--bg-moderno);
+    padding: 6rem 2rem;
+  }
+
+  .comparacao-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .coluna-comparacao {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .coluna-comparacao.historica {
+    background: linear-gradient(135deg, var(--pergaminho) 0%, var(--pergaminho-escuro) 100%);
+    color: var(--tinta);
+    border: 1px solid var(--sepia);
+  }
+
+  .coluna-comparacao.atual {
+    background: var(--texto-moderno);
+    color: var(--bg-moderno);
+  }
+
+  .coluna-era {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+
+  .coluna-titulo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .percentual-grande {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: clamp(4rem, 10vw, 6.5rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+  }
+
+  .coluna-comparacao.historica .percentual-grande {
+    color: var(--sangue);
+  }
+
+  .coluna-comparacao.atual .percentual-grande {
+    color: var(--destaque);
+  }
+
+  .percentual-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    opacity: 0.8;
+  }
+
+  .versus {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--cinza-suave);
+  }
+
+  /* ================= TEMPO DE TRABALHO ================= */
+  .tempo-trabalho {
+    background: var(--tinta);
+    color: var(--pergaminho);
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .tempo-titulo {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    line-height: 1.3;
+  }
+
+  .tempo-titulo strong {
+    font-weight: 700;
+    color: var(--ouro);
+  }
+
+  .calendario {
+    max-width: 700px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    border: 1px solid rgba(200, 160, 78, 0.2);
+  }
+
+  .mes {
+    aspect-ratio: 1;
+    background: rgba(139, 47, 47, 0.6);
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .mes.livre {
+    background: rgba(126, 196, 168, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .mes.parcial {
+    background: linear-gradient(90deg, rgba(139, 47, 47, 0.6) 0%, rgba(139, 47, 47, 0.6) 93%, rgba(126, 196, 168, 0.3) 93%, rgba(126, 196, 168, 0.3) 100%);
+  }
+
+  .legenda {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+  }
+
+  .legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .legenda-cor {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+  }
+
+  .legenda-cor.imposto {
+    background: rgba(139, 47, 47, 0.6);
+  }
+
+  .legenda-cor.livre {
+    background: rgba(126, 196, 168, 0.3);
+  }
+
+  /* ================= EFEITO CASCATA ================= */
+  .cascata {
+    background: var(--bg-moderno);
+    padding: 6rem 2rem;
+  }
+
+  .cascata-visual {
+    max-width: 900px;
+    margin: 3rem auto 0;
+    padding: 3rem;
+    background: white;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 4px;
+  }
+
+  .cascata-etapa {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px dashed var(--cinza-borda);
+  }
+
+  .cascata-etapa:last-child {
+    border-bottom: none;
+  }
+
+  .cascata-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--cinza-suave);
+  }
+
+  .cascata-barra {
+    height: 24px;
+    border-radius: 2px;
+    background: var(--cinza-borda);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cascata-barra-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--produto), var(--imposto));
+    position: relative;
+  }
+
+  .cascata-barra-fill.muito {
+    background: linear-gradient(90deg, var(--imposto), var(--destaque));
+  }
+
+  .cascata-valor {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    min-width: 100px;
+    text-align: right;
+  }
+
+  /* ================= RODAPÉ ================= */
+  .rodape {
+    background: var(--tinta);
+    color: var(--pergaminho);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .rodape-citacao {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.4;
+  }
+
+  .rodape-autor {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--ouro);
+    text-transform: uppercase;
+  }
+
+  .fontes {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(200, 160, 78, 0.2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(244, 234, 213, 0.5);
+    letter-spacing: 0.1em;
+  }
+
+  /* ================= ANIMAÇÕES ================= */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ================= RESPONSIVO ================= */
+  @media (max-width: 768px) {
+    .produto-base {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .camiseta-svg {
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+    }
+
+    .etapa {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .etapa-numero {
+      font-size: 2rem;
+    }
+
+    .breakdown-etapa {
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .bd-item {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      min-width: unset;
+      padding: 0.6rem 0.9rem;
+    }
+
+    .bd-label {
+      margin-bottom: 0;
+    }
+
+    .bd-op {
+      display: none;
+    }
+
+    .impostos-detalhe {
+      justify-content: center;
+    }
+
+    .aviso-simulacao {
+      flex-direction: column;
+      gap: 0.8rem;
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+    }
+
+    .aviso-icone {
+      font-size: 2rem;
+    }
+
+    .diagrama-fluxo {
+      padding: 2rem 1rem;
+    }
+
+    .diagrama-svg {
+      min-width: 900px;
+    }
+
+    .diagrama-fluxo {
+      overflow-x: auto;
+    }
+
+    .comparacao-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .versus {
+      transform: rotate(90deg);
+    }
+
+    .resultado-breakdown {
+      grid-template-columns: 1fr;
+    }
+
+    .resultado {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .calendario {
+      grid-template-columns: repeat(6, 1fr);
+      padding: 1rem;
+    }
+
+    .cascata-visual {
+      padding: 1.5rem;
+    }
+
+    .cascata-etapa {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .cascata-valor {
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO HISTÓRICO ================= -->
+<section class="hero">
+  <div class="hero-conteudo">
+    <div class="data-historica">Vila Rica · 21 de Abril</div>
+
+    <h1 class="titulo-historico">
+      Enforcaram o homem<br>
+      que lutava contra o<br>
+      <span class="destaque">Quinto</span>.
+    </h1>
+
+    <p class="subtitulo-historico">
+      Em 1789, a Coroa Portuguesa exigia 20% de todo o ouro extraído das Minas Gerais.<br>
+      A Inconfidência Mineira nasceu dessa revolta fiscal.<br>
+      Tiradentes pagou com a vida.
+    </p>
+
+    <div class="citacao-bloco">
+      <p class="citacao-texto">
+        "Fui eu, só eu! Morro como mártir porque entendi que a liberdade de minha pátria e o bem-estar de meu povo valiam o sacrifício de minha vida."
+      </p>
+      <p class="citacao-autor">— Joaquim José da Silva Xavier, o Tiradentes</p>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">E hoje, quanto pagamos?</div>
+</section>
+
+<!-- ================= TRANSIÇÃO ================= -->
+<section class="transicao">
+  <p class="transicao-texto">
+    Duzentos e trinta e sete anos depois,<br>
+    o Quinto virou <span class="ano-velho">20%</span> &nbsp;→&nbsp; <span class="ano-novo">40,82%</span>
+  </p>
+</section>
+
+<!-- ================= SEÇÃO MODERNA: CADEIA PRODUTIVA ================= -->
+<section class="moderno">
+  <div class="container">
+    <div class="secao-header">
+      <span class="etiqueta">Efeito Cascata na Prática</span>
+      <h2 class="titulo-moderno">
+        Vamos acompanhar uma <span class="highlight">camiseta</span><br>
+        da plantação até o seu armário.
+      </h2>
+      <p class="descricao-moderno">
+        A cada etapa da cadeia produtiva, impostos incidem sobre o valor — inclusive sobre impostos já pagos na etapa anterior. É o que chamamos de efeito cascata, ou "imposto sobre imposto".
+      </p>
+    </div>
+
+    <!-- AVISO SIMULAÇÃO -->
+    <div class="aviso-simulacao">
+      <div class="aviso-icone">⚠</div>
+      <div class="aviso-texto">
+        <strong>Este é um exemplo didático.</strong> Os valores, margens e alíquotas foram simplificados para facilitar a compreensão do efeito cascata. Cadeias produtivas reais têm mais etapas, créditos tributários, regimes especiais e variações por estado. O objetivo aqui é ilustrar <em>o conceito</em>, não calcular o preço exato de uma camiseta.
+      </div>
+    </div>
+
+    <!-- DIAGRAMA DO FLUXO -->
+    <div class="diagrama-fluxo">
+      <h3 class="diagrama-titulo">O caminho da camiseta</h3>
+      <svg class="diagrama-svg" viewBox="0 0 1100 200" xmlns="http://www.w3.org/2000/svg" aria-label="Fluxograma da cadeia produtiva">
+        <defs>
+          <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#c8a04e"/>
+          </marker>
+        </defs>
+
+        <!-- Linhas conectoras -->
+        <line x1="115" y1="85" x2="175" y2="85" stroke="#c8a04e" stroke-width="2" marker-end="url(#seta)"/>
+        <line x1="275" y1="85" x2="335" y2="85" stroke="#c8a04e" stroke-width="2" marker-end="url(#seta)"/>
+        <line x1="435" y1="85" x2="495" y2="85" stroke="#c8a04e" stroke-width="2" marker-end="url(#seta)"/>
+        <line x1="595" y1="85" x2="655" y2="85" stroke="#c8a04e" stroke-width="2" marker-end="url(#seta)"/>
+        <line x1="755" y1="85" x2="815" y2="85" stroke="#c8a04e" stroke-width="2" marker-end="url(#seta)"/>
+        <line x1="915" y1="85" x2="975" y2="85" stroke="#c8311c" stroke-width="2" marker-end="url(#seta)"/>
+
+        <!-- Ícone 1: Algodão (nuvem/planta) -->
+        <g>
+          <circle cx="57" cy="85" r="45" fill="#fff" stroke="#2d5f4f" stroke-width="2"/>
+          <circle cx="45" cy="75" r="9" fill="#2d5f4f" opacity="0.85"/>
+          <circle cx="60" cy="70" r="10" fill="#2d5f4f" opacity="0.85"/>
+          <circle cx="73" cy="78" r="8" fill="#2d5f4f" opacity="0.85"/>
+          <circle cx="50" cy="88" r="7" fill="#2d5f4f" opacity="0.85"/>
+          <circle cx="68" cy="90" r="8" fill="#2d5f4f" opacity="0.85"/>
+          <line x1="57" y1="100" x2="57" y2="115" stroke="#5c3a1e" stroke-width="2"/>
+          <text x="57" y="165" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="700">ALGODÃO</text>
+          <text x="57" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b6b6b">Produtor rural</text>
+        </g>
+
+        <!-- Ícone 2: Fiação (rolo de fio) -->
+        <g>
+          <circle cx="217" cy="85" r="45" fill="#fff" stroke="#2d5f4f" stroke-width="2"/>
+          <ellipse cx="217" cy="85" rx="22" ry="18" fill="none" stroke="#2d5f4f" stroke-width="2"/>
+          <ellipse cx="217" cy="85" rx="22" ry="14" fill="none" stroke="#2d5f4f" stroke-width="1.5"/>
+          <ellipse cx="217" cy="85" rx="22" ry="9" fill="none" stroke="#2d5f4f" stroke-width="1.5"/>
+          <ellipse cx="217" cy="85" rx="22" ry="4" fill="none" stroke="#2d5f4f" stroke-width="1.5"/>
+          <line x1="195" y1="85" x2="190" y2="95" stroke="#2d5f4f" stroke-width="1.5"/>
+          <text x="217" y="165" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="700">FIAÇÃO</text>
+          <text x="217" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b6b6b">Tecido</text>
+        </g>
+
+        <!-- Ícone 3: Confecção (máquina de costura) -->
+        <g>
+          <circle cx="377" cy="85" r="45" fill="#fff" stroke="#2d5f4f" stroke-width="2"/>
+          <rect x="358" y="70" width="38" height="18" rx="2" fill="#2d5f4f"/>
+          <rect x="362" y="88" width="30" height="4" fill="#5c3a1e"/>
+          <line x1="377" y1="88" x2="377" y2="100" stroke="#2d5f4f" stroke-width="2"/>
+          <circle cx="377" cy="103" r="3" fill="#c8a04e"/>
+          <path d="M 365 70 Q 377 62 389 70" fill="none" stroke="#2d5f4f" stroke-width="2"/>
+          <text x="377" y="165" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="700">CONFECÇÃO</text>
+          <text x="377" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b6b6b">Camiseta pronta</text>
+        </g>
+
+        <!-- Ícone 4: Atacado (caixa/galpão) -->
+        <g>
+          <circle cx="537" cy="85" r="45" fill="#fff" stroke="#2d5f4f" stroke-width="2"/>
+          <rect x="515" y="70" width="44" height="30" fill="#2d5f4f" opacity="0.85"/>
+          <line x1="537" y1="70" x2="537" y2="100" stroke="#fff" stroke-width="1.5"/>
+          <line x1="515" y1="85" x2="559" y2="85" stroke="#fff" stroke-width="1.5"/>
+          <rect x="522" y="62" width="30" height="8" fill="#c8a04e"/>
+          <text x="537" y="165" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="700">ATACADO</text>
+          <text x="537" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b6b6b">Distribuição</text>
+        </g>
+
+        <!-- Ícone 5: Varejo (sacola/loja) -->
+        <g>
+          <circle cx="697" cy="85" r="45" fill="#fff" stroke="#2d5f4f" stroke-width="2"/>
+          <path d="M 680 75 L 680 105 L 714 105 L 714 75 Z" fill="#2d5f4f" opacity="0.85"/>
+          <path d="M 685 75 Q 685 65 697 65 Q 709 65 709 75" fill="none" stroke="#2d5f4f" stroke-width="2"/>
+          <text x="697" y="95" text-anchor="middle" font-family="Fraunces, serif" font-size="11" fill="#fff" font-weight="700">R$</text>
+          <text x="697" y="165" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="700">VAREJO</text>
+          <text x="697" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b6b6b">Loja física/online</text>
+        </g>
+
+        <!-- Ícone 6: Consumidor (pessoa) -->
+        <g>
+          <circle cx="857" cy="85" r="45" fill="#fff" stroke="#2d5f4f" stroke-width="2"/>
+          <circle cx="857" cy="72" r="9" fill="#2d5f4f"/>
+          <path d="M 842 108 Q 842 88 857 88 Q 872 88 872 108 Z" fill="#2d5f4f"/>
+          <text x="857" y="165" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#1a1a1a" font-weight="700">VOCÊ</text>
+          <text x="857" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b6b6b">Consumidor</text>
+        </g>
+
+        <!-- Ícone 7: Governo (receita) -->
+        <g>
+          <circle cx="1017" cy="85" r="45" fill="#fff" stroke="#c8311c" stroke-width="2.5"/>
+          <rect x="995" y="68" width="44" height="34" fill="#c8311c" opacity="0.9"/>
+          <rect x="1002" y="58" width="30" height="10" fill="#c8311c"/>
+          <line x1="1003" y1="78" x2="1031" y2="78" stroke="#fff" stroke-width="1"/>
+          <line x1="1003" y1="85" x2="1031" y2="85" stroke="#fff" stroke-width="1"/>
+          <line x1="1003" y1="92" x2="1031" y2="92" stroke="#fff" stroke-width="1"/>
+          <text x="1017" y="165" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#c8311c" font-weight="700">GOVERNO</text>
+          <text x="1017" y="182" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b6b6b">Cobra em cada etapa</text>
+        </g>
+
+        <!-- Setas pontilhadas descendo para governo -->
+        <line x1="57" y1="130" x2="1000" y2="150" stroke="#c8311c" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+        <line x1="217" y1="130" x2="1005" y2="150" stroke="#c8311c" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+        <line x1="377" y1="130" x2="1010" y2="150" stroke="#c8311c" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+        <line x1="537" y1="130" x2="1015" y2="150" stroke="#c8311c" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+        <line x1="697" y1="130" x2="1020" y2="150" stroke="#c8311c" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+      </svg>
+      <p class="diagrama-legenda">
+        A cada passagem de mão, incidem impostos. O governo cobra em <strong>todas as etapas</strong> — e o custo final recai sobre quem está no fim da linha: <strong>você</strong>.
+      </p>
+    </div>
+
+    <!-- Produto base -->
+    <div class="produto-base">
+      <svg class="camiseta-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cam-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2d5f4f"/>
+            <stop offset="100%" stop-color="#1a3d31"/>
+          </linearGradient>
+        </defs>
+        <path d="M 35 35 L 50 20 L 60 25 Q 70 32 80 25 L 90 20 L 105 35 L 120 50 L 110 60 L 100 55 L 100 120 Q 100 125 95 125 L 45 125 Q 40 125 40 120 L 40 55 L 30 60 L 20 50 Z"
+              fill="url(#cam-grad)" stroke="#1a1a1a" stroke-width="1.5"/>
+        <path d="M 60 25 Q 70 35 80 25" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <circle cx="70" cy="75" r="3" fill="#c8a04e" opacity="0.6"/>
+      </svg>
+      <div class="produto-info">
+        <h3>Camiseta 100% Algodão</h3>
+        <p>Produto simples, fabricação nacional, venda no varejo brasileiro.</p>
+        <span class="produto-custo">Custo real de produção: R$ 20,00</span>
+      </div>
+    </div>
+
+    <!-- CADEIA PRODUTIVA -->
+    <div class="cadeia">
+
+      <!-- Etapa 1 -->
+      <div class="etapa">
+        <div class="etapa-numero">01</div>
+        <div class="etapa-conteudo">
+          <h4>Produtor de Algodão</h4>
+          <p class="descricao">Agricultor cultiva e colhe o algodão bruto. Vende para a indústria de fiação.</p>
+
+          <div class="breakdown-etapa">
+            <div class="bd-item bd-custo">
+              <span class="bd-label">Custo produção</span>
+              <span class="bd-valor">R$ 20,00</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-margem">
+              <span class="bd-label">Margem (25%)</span>
+              <span class="bd-valor">R$ 5,00</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-imposto">
+              <span class="bd-label">Impostos</span>
+              <span class="bd-valor">R$ 2,20</span>
+            </div>
+            <div class="bd-op">=</div>
+            <div class="bd-item bd-total">
+              <span class="bd-label">Venda</span>
+              <span class="bd-valor">R$ 27,20</span>
+            </div>
+          </div>
+
+          <div class="impostos-detalhe">
+            <span class="imposto-tag">FUNRURAL 1,5%</span>
+            <span class="imposto-tag">PIS/COFINS 9,25% s/ margem</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="seta-cadeia">↓</div>
+
+      <!-- Etapa 2 -->
+      <div class="etapa">
+        <div class="etapa-numero">02</div>
+        <div class="etapa-conteudo">
+          <h4>Fiação e Tecelagem</h4>
+          <p class="descricao">Indústria transforma algodão em tecido. Gastos com energia, máquinas, mão de obra.</p>
+
+          <div class="breakdown-etapa">
+            <div class="bd-item bd-custo">
+              <span class="bd-label">Compra algodão</span>
+              <span class="bd-valor">R$ 27,20</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-margem">
+              <span class="bd-label">Margem (40%)</span>
+              <span class="bd-valor">R$ 10,88</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-imposto">
+              <span class="bd-label">Impostos</span>
+              <span class="bd-valor">R$ 14,70</span>
+            </div>
+            <div class="bd-op">=</div>
+            <div class="bd-item bd-total">
+              <span class="bd-label">Venda</span>
+              <span class="bd-valor">R$ 52,78</span>
+            </div>
+          </div>
+
+          <div class="impostos-detalhe">
+            <span class="imposto-tag">ICMS 18%</span>
+            <span class="imposto-tag">IPI 5%</span>
+            <span class="imposto-tag">PIS/COFINS 9,25%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="seta-cadeia">↓</div>
+
+      <!-- Etapa 3 -->
+      <div class="etapa">
+        <div class="etapa-numero">03</div>
+        <div class="etapa-conteudo">
+          <h4>Confecção</h4>
+          <p class="descricao">Fabricante corta, costura e finaliza a camiseta. Mão de obra intensiva.</p>
+
+          <div class="breakdown-etapa">
+            <div class="bd-item bd-custo">
+              <span class="bd-label">Compra tecido</span>
+              <span class="bd-valor">R$ 52,78</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-margem">
+              <span class="bd-label">Margem (35%)</span>
+              <span class="bd-valor">R$ 18,47</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-imposto">
+              <span class="bd-label">Impostos</span>
+              <span class="bd-valor">R$ 29,79</span>
+            </div>
+            <div class="bd-op">=</div>
+            <div class="bd-item bd-total">
+              <span class="bd-label">Venda</span>
+              <span class="bd-valor">R$ 101,04</span>
+            </div>
+          </div>
+
+          <div class="impostos-detalhe">
+            <span class="imposto-tag">ICMS 18%</span>
+            <span class="imposto-tag">IPI 10%</span>
+            <span class="imposto-tag">PIS/COFINS 9,25%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="seta-cadeia">↓</div>
+
+      <!-- Etapa 4 -->
+      <div class="etapa">
+        <div class="etapa-numero">04</div>
+        <div class="etapa-conteudo">
+          <h4>Distribuidor / Atacadista</h4>
+          <p class="descricao">Compra em larga escala, armazena, transporta e distribui para os varejistas.</p>
+
+          <div class="breakdown-etapa">
+            <div class="bd-item bd-custo">
+              <span class="bd-label">Compra camiseta</span>
+              <span class="bd-valor">R$ 101,04</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-margem">
+              <span class="bd-label">Margem (20%)</span>
+              <span class="bd-valor">R$ 20,21</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-imposto">
+              <span class="bd-label">Impostos</span>
+              <span class="bd-valor">R$ 33,95</span>
+            </div>
+            <div class="bd-op">=</div>
+            <div class="bd-item bd-total">
+              <span class="bd-label">Venda</span>
+              <span class="bd-valor">R$ 155,20</span>
+            </div>
+          </div>
+
+          <div class="impostos-detalhe">
+            <span class="imposto-tag">ICMS 18%</span>
+            <span class="imposto-tag">PIS/COFINS 9,25%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="seta-cadeia">↓</div>
+
+      <!-- Etapa 5 -->
+      <div class="etapa">
+        <div class="etapa-numero">05</div>
+        <div class="etapa-conteudo">
+          <h4>Varejo</h4>
+          <p class="descricao">Loja vende ao consumidor final. A margem cobre aluguel, funcionários, marketing e o lucro da loja.</p>
+
+          <div class="breakdown-etapa">
+            <div class="bd-item bd-custo">
+              <span class="bd-label">Compra do atacado</span>
+              <span class="bd-valor">R$ 155,20</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-margem">
+              <span class="bd-label">Margem (50%)</span>
+              <span class="bd-valor">R$ 77,60</span>
+            </div>
+            <div class="bd-op">+</div>
+            <div class="bd-item bd-imposto">
+              <span class="bd-label">Impostos</span>
+              <span class="bd-valor">R$ 65,04</span>
+            </div>
+            <div class="bd-op">=</div>
+            <div class="bd-item bd-total">
+              <span class="bd-label">Preço final</span>
+              <span class="bd-valor">R$ 297,84</span>
+            </div>
+          </div>
+
+          <div class="impostos-detalhe">
+            <span class="imposto-tag">ICMS 18%</span>
+            <span class="imposto-tag">PIS/COFINS 9,25%</span>
+            <span class="imposto-tag">ISS / Taxas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTADO FINAL -->
+    <div class="resultado">
+      <div class="resultado-label">O que você paga na loja</div>
+      <div class="resultado-preco">R$ 297,84</div>
+
+      <div class="resultado-breakdown">
+        <div class="breakdown-item produto">
+          <div class="rotulo">Produto + Lucros</div>
+          <div class="valor">R$ 147,16</div>
+          <div style="font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem;">49,4% do total</div>
+        </div>
+        <div class="breakdown-item imposto">
+          <div class="rotulo">Impostos Acumulados</div>
+          <div class="valor">R$ 150,68</div>
+          <div style="font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem;">50,6% do total</div>
+        </div>
+      </div>
+
+      <p style="margin-top: 2.5rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; opacity: 0.85; max-width: 600px; margin-left: auto; margin-right: auto;">
+        De cada R$ 100 gastos numa camiseta, mais de R$ 50 vão para os cofres públicos — invisíveis, embutidos no preço.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EFEITO CASCATA VISUAL ================= -->
+<section class="cascata">
+  <div class="container">
+    <div class="secao-header">
+      <span class="etiqueta">Imposto sobre Imposto</span>
+      <h2 class="titulo-moderno">
+        Como o preço <span class="highlight">infla</span> em cada etapa.
+      </h2>
+      <p class="descricao-moderno">
+        O efeito cascata: a cada nova etapa, o imposto incide também sobre o imposto já cobrado anteriormente, multiplicando o valor final.
+      </p>
+    </div>
+
+    <div class="cascata-visual">
+      <div class="cascata-etapa">
+        <div class="cascata-label">Custo real</div>
+        <div class="cascata-barra"><div class="cascata-barra-fill" style="width: 10%;"></div></div>
+        <div class="cascata-valor">R$ 20,00</div>
+      </div>
+      <div class="cascata-etapa">
+        <div class="cascata-label">Após algodão</div>
+        <div class="cascata-barra"><div class="cascata-barra-fill" style="width: 14%;"></div></div>
+        <div class="cascata-valor">R$ 27,20</div>
+      </div>
+      <div class="cascata-etapa">
+        <div class="cascata-label">Após tecelagem</div>
+        <div class="cascata-barra"><div class="cascata-barra-fill" style="width: 27%;"></div></div>
+        <div class="cascata-valor">R$ 52,78</div>
+      </div>
+      <div class="cascata-etapa">
+        <div class="cascata-label">Após confecção</div>
+        <div class="cascata-barra"><div class="cascata-barra-fill" style="width: 51%;"></div></div>
+        <div class="cascata-valor">R$ 101,04</div>
+      </div>
+      <div class="cascata-etapa">
+        <div class="cascata-label">Após atacado</div>
+        <div class="cascata-barra"><div class="cascata-barra-fill muito" style="width: 78%;"></div></div>
+        <div class="cascata-valor">R$ 155,20</div>
+      </div>
+      <div class="cascata-etapa">
+        <div class="cascata-label">Prateleira</div>
+        <div class="cascata-barra"><div class="cascata-barra-fill muito" style="width: 100%;"></div></div>
+        <div class="cascata-valor" style="color: var(--destaque);">R$ 297,84</div>
+      </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 2rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; color: var(--cinza-suave); max-width: 700px; margin-left: auto; margin-right: auto;">
+      Um produto que custou <strong>R$ 20</strong> para ser feito chega ao consumidor custando <strong>R$ 297,84</strong> — quase 15× mais. E mais da metade disso vira imposto.
+    </p>
+  </div>
+</section>
+
+<!-- ================= COMPARAÇÃO HISTÓRICA ================= -->
+<section class="comparacao">
+  <div class="container">
+    <div class="secao-header">
+      <span class="etiqueta">O Paralelo Histórico</span>
+      <h2 class="titulo-moderno">
+        O Quinto de ontem vs. <span class="highlight">a carga de hoje</span>.
+      </h2>
+    </div>
+
+    <div class="comparacao-grid">
+      <div class="coluna-comparacao historica">
+        <div class="coluna-era">1789 · Brasil Colônia</div>
+        <h3 class="coluna-titulo">O Quinto + Derrama</h3>
+        <div class="percentual-grande">20%</div>
+        <p class="percentual-desc">
+          Imposto da Coroa sobre o ouro extraído.<br>
+          Foi considerado <strong>tão abusivo</strong> que motivou a Inconfidência Mineira.
+        </p>
+      </div>
+
+      <div class="versus">vs</div>
+
+      <div class="coluna-comparacao atual">
+        <div class="coluna-era">2025 · Brasil República</div>
+        <h3 class="coluna-titulo">Carga Tributária sobre a Renda</h3>
+        <div class="percentual-grande">40,82%</div>
+        <p class="percentual-desc">
+          Soma de impostos sobre renda, consumo e patrimônio,<br>
+          segundo o IBPT — <strong>mais que o dobro do Quinto</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEMPO DE TRABALHO ================= -->
+<section class="tempo-trabalho">
+  <div class="container">
+    <p class="tempo-titulo">
+      Em 2025, o brasileiro precisa trabalhar até<br>
+      <strong>29 de maio</strong> só para pagar impostos.<br>
+      <span style="font-size: 0.75em; opacity: 0.7;">São <strong>149 dias</strong> — quase 5 meses inteiros do ano.</span>
+    </p>
+
+    <div class="calendario" id="calendario"></div>
+
+    <div class="legenda">
+      <div class="legenda-item">
+        <div class="legenda-cor imposto"></div>
+        <span>Trabalhando para o governo</span>
+      </div>
+      <div class="legenda-item">
+        <div class="legenda-cor livre"></div>
+        <span>Trabalhando para você</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RODAPÉ ================= -->
+<section class="rodape">
+  <div class="container">
+    <p class="rodape-citacao">
+      "A liberdade, ainda que tardia."
+    </p>
+    <p class="rodape-autor">— Lema da Inconfidência Mineira</p>
+
+    <p style="margin-top: 3rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(244, 234, 213, 0.85); max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+      Tiradentes não morreu contra impostos. Morreu contra <strong style="color: var(--ouro);">impostos sem representação, sem transparência e sem retorno</strong>. Duzentos anos depois, a pergunta continua atual: <em>para onde vai o nosso Quinto?</em>
+    </p>
+
+    <div class="fontes">
+      Fontes: IBPT (Dias Trabalhados 2025) · Tesouro Nacional (Carga Tributária 2025: 32,4% do PIB) · Alíquotas estimadas com base em legislação tributária vigente (ICMS-MG 18%, PIS/COFINS 9,25%, IPI setor têxtil). Simulação didática.
+    </div>
+  </div>
+</section>
+
+<script>
+  // Renderiza o calendário: 149 dias para o governo, 216 para você
+  const calendario = document.getElementById('calendario');
+  const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+
+  meses.forEach((mes, idx) => {
+    const div = document.createElement('div');
+    div.className = 'mes';
+    div.textContent = mes;
+    // Jan-Abr completos de imposto (idx 0-3), Maio parcial (idx 4), Jun-Dez livres (idx 5-11)
+    if (idx <= 3) {
+      div.classList.add('imposto'); // vermelho - trabalhando para o governo
+    } else if (idx === 4) {
+      div.classList.add('parcial'); // maio é parcial (29 dias de imposto, 2 livres)
+    } else {
+      div.classList.add('livre'); // verde - trabalhando para si
+    }
+    calendario.appendChild(div);
+  });
+
+  // Animação das barras da cascata ao entrar na viewport
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fills = entry.target.querySelectorAll('.cascata-barra-fill');
+        fills.forEach((fill, i) => {
+          const targetWidth = fill.style.width;
+          fill.style.width = '0%';
+          setTimeout(() => {
+            fill.style.transition = 'width 1s ease-out';
+            fill.style.width = targetWidth;
+          }, i * 150);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const cascataVisual = document.querySelector('.cascata-visual');
+  if (cascataVisual) observer.observe(cascataVisual);
+</script>
+
+</body>
+</html>
